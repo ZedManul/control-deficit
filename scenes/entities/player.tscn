@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://dof6ovnhiqdvp"]
+[gd_scene load_steps=18 format=3 uid="uid://dof6ovnhiqdvp"]
 
 [ext_resource type="Texture2D" uid="uid://2vqu2wrbka0y" path="res://assets/sprites/SeekerSpriteSheet.png" id="1_2j103"]
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_dmlgn"]
 [ext_resource type="Script" path="res://addons/soupik/utility/soup_bone.gd" id="2_22uee"]
 [ext_resource type="Script" path="res://addons/soupik/resources/zm_easing_params.gd" id="3_51pvk"]
 [ext_resource type="Script" path="res://addons/soupik/modifications/soup_group.gd" id="3_vpti7"]
@@ -56,12 +57,18 @@ script = ExtResource("4_te7y3")
 velocity_effect = 0.0
 params = SubResource("Resource_bxr0k")
 
-[node name="Player" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_v3d8y"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("coyote_timer", "buffer_timer")]
+script = ExtResource("1_dmlgn")
+coyote_timer = NodePath("CoyoteTimer")
+buffer_timer = NodePath("BufferTimer")
 
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="HeadTarget" type="Marker2D" parent="Visuals"]
-position = Vector2(15, -18)
+position = Vector2(24, -18)
 
 [node name="BodyTarget" type="Marker2D" parent="Visuals"]
 position = Vector2(2, -12)
@@ -69,7 +76,7 @@ position = Vector2(2, -12)
 [node name="WheelTarget" type="Marker2D" parent="Visuals"]
 position = Vector2(-23, -11)
 
-[node name="Sprites" type="Node" parent="Visuals"]
+[node name="Sprites" type="Node2D" parent="Visuals"]
 
 [node name="Wheel" type="Sprite2D" parent="Visuals/Sprites"]
 position = Vector2(-6, -12)
@@ -79,9 +86,8 @@ region_enabled = true
 region_rect = Rect2(1, 16, 12, 12)
 
 [node name="Leg2" type="Sprite2D" parent="Visuals/Sprites"]
-position = Vector2(-7.99997, -8.99999)
-rotation = -1.5708
-scale = Vector2(0.999999, 0.999999)
+position = Vector2(-7.99995, -8.99995)
+rotation = -1.57081
 texture = ExtResource("1_2j103")
 centered = false
 region_enabled = true
@@ -89,23 +95,21 @@ region_rect = Rect2(24, 17, 8, 13)
 
 [node name="Leg1" type="Sprite2D" parent="Visuals/Sprites"]
 position = Vector2(-11, -17)
-scale = Vector2(1, 1)
 texture = ExtResource("1_2j103")
 centered = false
 region_enabled = true
 region_rect = Rect2(18, 1, 14, 14)
 
 [node name="Head" type="Sprite2D" parent="Visuals/Sprites"]
-position = Vector2(0.999981, -21.9999)
-scale = Vector2(0.999998, 0.999998)
+position = Vector2(1, -22)
+scale = Vector2(0.999999, 0.999999)
 texture = ExtResource("1_2j103")
 centered = false
 region_enabled = true
 region_rect = Rect2(15, 18, 7, 7)
 
 [node name="Hull" type="Sprite2D" parent="Visuals/Sprites"]
-position = Vector2(-8, -20.9999)
-rotation = -1.03074e-05
+position = Vector2(-7.99999, -21)
 scale = Vector2(0.999999, 0.999999)
 texture = ExtResource("1_2j103")
 centered = false
@@ -115,7 +119,6 @@ region_rect = Rect2(1, 1, 15, 13)
 [node name="Skeleton2D" type="Skeleton2D" parent="Visuals"]
 
 [node name="Base" type="Bone2D" parent="Visuals/Skeleton2D"]
-visible = false
 position = Vector2(0, -6)
 rest = Transform2D(1, 0, 0, 1, 0, -6)
 auto_calculate_length_and_angle = false
@@ -124,7 +127,6 @@ bone_angle = 0.0
 metadata/_edit_group_ = true
 
 [node name="Leg1Bone" type="Bone2D" parent="Visuals/Skeleton2D/Base"]
-scale = Vector2(1, 1)
 rest = Transform2D(1, 2.54158e-07, -2.54158e-07, 1, 0, 0)
 
 [node name="Leg1RT" type="RemoteTransform2D" parent="Visuals/Skeleton2D/Base/Leg1Bone"]
@@ -133,8 +135,7 @@ remote_path = NodePath("../../../../Sprites/Leg1")
 
 [node name="Leg2Bone" type="Bone2D" parent="Visuals/Skeleton2D/Base/Leg1Bone"]
 position = Vector2(-5, -8)
-rotation = 3.14159
-scale = Vector2(1, 1)
+rotation = 3.14158
 rest = Transform2D(-1, 4.44253e-06, -4.44253e-06, -1, -5, -8)
 
 [node name="Leg2RT" type="RemoteTransform2D" parent="Visuals/Skeleton2D/Base/Leg1Bone/Leg2Bone"]
@@ -145,16 +146,16 @@ remote_path = NodePath("../../../../../Sprites/Leg2")
 [node name="HullBone" type="Bone2D" parent="Visuals/Skeleton2D/Base/Leg1Bone/Leg2Bone"]
 z_index = 1
 position = Vector2(-6.99999, -2.00008)
-rotation = -3.14159
+rotation = -3.14158
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(-1, -4.20411e-06, 4.20411e-06, -1, -6.99999, -2.00003)
 auto_calculate_length_and_angle = false
-length = 6.32455
-bone_angle = -120.0
+length = 8.0
+bone_angle = -45.0
 script = ExtResource("2_22uee")
 transform_mode = 0
-target_rotation = -3.14159
-target_position = Vector2(-6.99999, -2.00006)
+target_rotation = -3.14158
+target_position = Vector2(-6.99999, -2.00008)
 ease_rotation = true
 rotation_easing_params = SubResource("Resource_m8qsw")
 ease_position = true
@@ -169,7 +170,6 @@ remote_path = NodePath("../../../../../../Sprites/Hull")
 
 [node name="HeadBone" type="Bone2D" parent="Visuals/Skeleton2D/Base/Leg1Bone/Leg2Bone/HullBone"]
 position = Vector2(2, -6.00001)
-scale = Vector2(1, 1)
 rest = Transform2D(1, -1.57393e-08, 1.57393e-08, 1, 2, -6)
 auto_calculate_length_and_angle = false
 length = 4.0
@@ -233,3 +233,17 @@ target_node = NodePath("../../../WheelTarget")
 enabled = true
 bone_node = NodePath("../../Base/WheelBone")
 look_at_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_v3d8y")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="BufferTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true

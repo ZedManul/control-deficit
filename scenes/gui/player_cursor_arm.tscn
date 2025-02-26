@@ -1,0 +1,274 @@
+[gd_scene load_steps=13 format=3 uid="uid://cras0ddso0mfm"]
+
+[ext_resource type="Texture2D" uid="uid://0jivfoe0ipyq" path="res://assets/sprites/ButtonsSpriteSheet.png" id="1_1ex5r"]
+[ext_resource type="Script" path="res://addons/soupik/modifications/soup_fabrik.gd" id="2_7kq02"]
+[ext_resource type="Script" path="res://addons/soupik/utility/soup_bone.gd" id="2_leavr"]
+[ext_resource type="Script" path="res://addons/soupik/modifications/soup_group.gd" id="2_ukgaj"]
+[ext_resource type="Script" path="res://addons/soupik/resources/zm_easing_params.gd" id="3_upo2r"]
+[ext_resource type="Script" path="res://addons/soupik/modifications/soup_look_at.gd" id="4_2mony"]
+[ext_resource type="Script" path="res://addons/soupik/resources/zm_easing_rotational_params.gd" id="4_75gx6"]
+[ext_resource type="Script" path="res://scripts/player/claw_controller.gd" id="5_pk2jo"]
+[ext_resource type="Script" path="res://addons/soupik/resources/zm_constraint_data.gd" id="9_lwyg2"]
+
+[sub_resource type="Resource" id="Resource_ens6v"]
+script = ExtResource("3_upo2r")
+frequency = 1.0
+damping = 1.0
+reaction = 1.0
+gravity = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_vq8ak"]
+script = ExtResource("4_75gx6")
+velocity_effect = -10.0
+params = SubResource("Resource_ens6v")
+
+[sub_resource type="Resource" id="Resource_v28oh"]
+script = ExtResource("9_lwyg2")
+rotation_direction_degrees = -180.0
+rotation_half_arc_degrees = 45.0
+area_offset = Vector2(0, 0)
+area_rotation_degrees = 0.0
+proportions = Vector2(1, 1)
+
+[node name="PlayerCursorArm" type="Node2D"]
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Arm8" type="Sprite2D" parent="Sprites"]
+position = Vector2(-0.00214714, 116.996)
+rotation = -1.53782e-05
+scale = Vector2(0.999985, 0.999985)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-16, -8)
+region_enabled = true
+region_rect = Rect2(185, 7, 36, 151)
+
+[node name="Arm6" type="Sprite2D" parent="Sprites"]
+position = Vector2(-11.001, 136.994)
+rotation = 3.14157
+scale = Vector2(0.999985, 0.999985)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-16, -8)
+region_enabled = true
+region_rect = Rect2(185, 7, 36, 151)
+
+[node name="Arm7" type="Sprite2D" parent="Sprites"]
+position = Vector2(14.9983, 136.996)
+rotation = 3.14157
+scale = Vector2(0.999985, 0.999985)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-16, -8)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(185, 7, 36, 151)
+
+[node name="Arm4" type="Sprite2D" parent="Sprites"]
+position = Vector2(-505, -379)
+rotation = -0.868086
+scale = Vector2(0.999993, 0.999993)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-8.86451, -6.01326)
+region_enabled = true
+region_rect = Rect2(98, 8, 23, 145)
+
+[node name="Arm3" type="Sprite2D" parent="Sprites"]
+position = Vector2(-403.096, -296.626)
+rotation = -1.06141
+scale = Vector2(0.999991, 0.999991)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-11, -11)
+region_enabled = true
+region_rect = Rect2(123, 5, 25, 149)
+
+[node name="Arm2" type="Sprite2D" parent="Sprites"]
+position = Vector2(-288.625, -234.978)
+rotation = -0.655663
+scale = Vector2(0.999991, 0.999991)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-14, -13)
+region_enabled = true
+region_rect = Rect2(150, 3, 29, 155)
+
+[node name="Arm1" type="Sprite2D" parent="Sprites"]
+position = Vector2(-210.769, -132.119)
+rotation = -1.27946
+scale = Vector2(0.999987, 0.999987)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-16, -8)
+region_enabled = true
+region_rect = Rect2(185, 7, 36, 151)
+
+[node name="Arm5" type="Sprite2D" parent="Sprites"]
+position = Vector2(-87.204, -95.0666)
+rotation = -0.742278
+scale = Vector2(0.999986, 0.999986)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-16, -8)
+region_enabled = true
+region_rect = Rect2(185, 7, 36, 151)
+
+[node name="Hand" type="Node2D" parent="Sprites"]
+position = Vector2(-505, -379)
+scale = Vector2(0.999994, 0.999994)
+
+[node name="HandRdy" type="Sprite2D" parent="Sprites/Hand"]
+scale = Vector2(0.999994, 0.999994)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-36.6142, -8.81309)
+region_enabled = true
+region_rect = Rect2(180, 160, 41, 31)
+
+[node name="HandGrab" type="Sprite2D" parent="Sprites/Hand"]
+visible = false
+position = Vector2(-9.53674e-07, 5.96046e-06)
+scale = Vector2(0.999994, 0.999994)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-30.6142, -9.81309)
+region_enabled = true
+region_rect = Rect2(143, 160, 35, 30)
+
+[node name="HandMisgrab" type="Sprite2D" parent="Sprites/Hand"]
+visible = false
+position = Vector2(3.8147e-06, -8.10623e-06)
+scale = Vector2(0.999994, 0.999994)
+texture = ExtResource("1_1ex5r")
+centered = false
+offset = Vector2(-22.6141, -7.81309)
+region_enabled = true
+region_rect = Rect2(114, 163, 27, 27)
+
+[node name="Skeleton2D" type="Skeleton2D" parent="." node_paths=PackedStringArray("cursor_marker", "hand_sprite_rdy", "hand_sprite_grab", "hand_sprite_misgrab")]
+position = Vector2(-505, -379)
+script = ExtResource("5_pk2jo")
+cursor_marker = NodePath("Marker2D")
+hand_sprite_rdy = NodePath("../Sprites/Hand/HandRdy")
+hand_sprite_grab = NodePath("../Sprites/Hand/HandGrab")
+hand_sprite_misgrab = NodePath("../Sprites/Hand/HandMisgrab")
+
+[node name="Arm4Bone" type="Bone2D" parent="Skeleton2D"]
+rotation = -0.868086
+scale = Vector2(0.999993, 0.999993)
+rest = Transform2D(-0.279473, -0.960147, 0.960147, -0.279473, 0, 0)
+
+[node name="Arm4RT" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone"]
+remote_path = NodePath("../../../Sprites/Arm4")
+
+[node name="Arm3Bone" type="Bone2D" parent="Skeleton2D/Arm4Bone"]
+position = Vector2(3.00031, 131.001)
+rotation = -0.193322
+scale = Vector2(0.999998, 0.999998)
+rest = Transform2D(-0.404304, 0.914624, -0.914624, -0.404304, 3.00031, 131.001)
+
+[node name="Arm3RT" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone/Arm3Bone"]
+remote_path = NodePath("../../../../Sprites/Arm3")
+
+[node name="Arm2Bone" type="Bone2D" parent="Skeleton2D/Arm4Bone/Arm3Bone"]
+position = Vector2(2.0003, 130.001)
+rotation = 0.405745
+scale = Vector2(1, 1)
+rest = Transform2D(0.715449, 0.698665, -0.698665, 0.715449, 2.0003, 130.001)
+
+[node name="Arm2RT" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone"]
+remote_path = NodePath("../../../../../Sprites/Arm2")
+
+[node name="Arm1Bone" type="Bone2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone"]
+position = Vector2(-0.999718, 129)
+rotation = -0.623797
+scale = Vector2(0.999996, 0.999996)
+rest = Transform2D(0.999283, 0.0378308, -0.0378308, 0.999283, -0.999718, 129)
+
+[node name="Arm1RT" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone"]
+remote_path = NodePath("../../../../../../Sprites/Arm1")
+
+[node name="Arm5Bone" type="Bone2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone"]
+position = Vector2(0.00101638, 129.002)
+rotation = 0.537182
+scale = Vector2(0.999999, 0.999999)
+rest = Transform2D(0.586277, -0.81011, 0.81011, 0.586277, 0.00101638, 129.002)
+auto_calculate_length_and_angle = false
+length = 129.0
+bone_angle = 90.0
+
+[node name="Arm5RT" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone"]
+remote_path = NodePath("../../../../../../../Sprites/Arm5")
+
+[node name="Arm6Bone" type="Bone2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone"]
+position = Vector2(0.00230598, 129.001)
+rotation = 0.742263
+scale = Vector2(0.999999, 0.999999)
+rest = Transform2D(0.586277, -0.81011, 0.81011, 0.586277, 0.00101638, 129.002)
+auto_calculate_length_and_angle = false
+length = 129.0
+bone_angle = 90.0
+
+[node name="Arm5RT" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone/Arm6Bone"]
+position = Vector2(-11.0003, 137.001)
+rotation = 3.14159
+remote_path = NodePath("../../../../../../../../Sprites/Arm6")
+
+[node name="Arm5RT2" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone/Arm6Bone"]
+position = Vector2(14.9994, 137.003)
+rotation = 3.14159
+remote_path = NodePath("../../../../../../../../Sprites/Arm7")
+
+[node name="Arm5RT3" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone/Arm6Bone"]
+position = Vector2(-0.000993848, 117.003)
+remote_path = NodePath("../../../../../../../../Sprites/Arm8")
+
+[node name="SoupGroup" type="Node" parent="Skeleton2D"]
+script = ExtResource("2_ukgaj")
+
+[node name="SoupFABRIK" type="Node" parent="Skeleton2D/SoupGroup" node_paths=PackedStringArray("target_node", "chain_root", "chain_tip")]
+script = ExtResource("2_7kq02")
+target_node = NodePath("../../../ClawTarget")
+enabled = true
+chain_root = NodePath("../../Arm4Bone")
+chain_tip = NodePath("../../Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone")
+iterations = 8
+
+[node name="SoupLookAt" type="Node" parent="Skeleton2D/SoupGroup" node_paths=PackedStringArray("target_node", "bone_node")]
+script = ExtResource("4_2mony")
+target_node = NodePath("../../../ClawTarget")
+enabled = true
+bone_node = NodePath("../../HandBone")
+look_at_mode = 1
+
+[node name="SoupLookAt2" type="Node" parent="Skeleton2D/SoupGroup" node_paths=PackedStringArray("target_node", "bone_node")]
+script = ExtResource("4_2mony")
+target_node = NodePath("../../../ClawTarget/ClawTarget2")
+enabled = true
+bone_node = NodePath("../../Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone/Arm6Bone")
+
+[node name="HandBone" type="Bone2D" parent="Skeleton2D"]
+scale = Vector2(0.999994, 0.999994)
+rest = Transform2D(0.999994, 4.44087e-16, -4.44087e-16, 0.999994, 0, 0)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 180.0
+script = ExtResource("2_leavr")
+transform_mode = 0
+ease_rotation = true
+rotation_easing_params = SubResource("Resource_vq8ak")
+limit_rotation = true
+constraint_data = SubResource("Resource_v28oh")
+
+[node name="HandRT" type="RemoteTransform2D" parent="Skeleton2D/HandBone"]
+remote_path = NodePath("../../../Sprites/Hand")
+
+[node name="Marker2D" type="Marker2D" parent="Skeleton2D"]
+position = Vector2(-12, 3)
+
+[node name="ClawTarget" type="Marker2D" parent="."]
+
+[node name="ClawTarget2" type="Marker2D" parent="ClawTarget"]
+position = Vector2(0, 193)

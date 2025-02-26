@@ -1,3 +1,45 @@
-[gd_scene format=3 uid="uid://cg57e5xigi8ea"]
+[gd_scene load_steps=6 format=3 uid="uid://cg57e5xigi8ea"]
+
+[ext_resource type="PackedScene" uid="uid://c0h0ajcunwavf" path="res://scenes/levels/tiletest.tscn" id="1_sdxe2"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_tg7e2"]
+[ext_resource type="Texture2D" uid="uid://0jivfoe0ipyq" path="res://assets/sprites/ButtonsSpriteSheet.png" id="1_ujihf"]
+[ext_resource type="PackedScene" uid="uid://dof6ovnhiqdvp" path="res://scenes/entities/player.tscn" id="2_bb4hc"]
+[ext_resource type="PackedScene" uid="uid://cras0ddso0mfm" path="res://scenes/gui/player_cursor_arm.tscn" id="3_556hx"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_tg7e2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Node2D" parent="." instance=ExtResource("1_sdxe2")]
+
+[node name="Player" parent="." instance=ExtResource("2_bb4hc")]
+position = Vector2(112, 8)
+acceleration = 5.0
+friction = 0.02
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ujihf")
+region_rect = Rect2(0, 96, 96, 96)
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Slots" type="Node2D" parent="."]
+
+[node name="PlayerCursorArm" parent="." instance=ExtResource("3_556hx")]
+position = Vector2(800, 450)
