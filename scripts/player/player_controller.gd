@@ -24,6 +24,7 @@ var want_jump: bool = false
 
 
 func _ready() -> void:
+	GlobalRefs.player = self
 	ControlSignalBus.inp_jump.connect(handle_jump_input)
 	ControlSignalBus.inp_left.connect(handle_move_left)
 	ControlSignalBus.inp_right.connect(handle_move_right)

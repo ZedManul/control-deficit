@@ -1,4 +1,5 @@
 extends Node
 
 func _ready() -> void:
-	pass # Replace with function body.
+	GlobalRefs.main = self
+	GlobalRefs.slot_layer = %SlotLayer

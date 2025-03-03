@@ -101,7 +101,7 @@ region_enabled = true
 region_rect = Rect2(18, 1, 14, 14)
 
 [node name="Head" type="Sprite2D" parent="Visuals/Sprites"]
-position = Vector2(1, -22)
+position = Vector2(0.999998, -22)
 scale = Vector2(0.999999, 0.999999)
 texture = ExtResource("1_2j103")
 centered = false
@@ -169,14 +169,14 @@ rotation = 6.28318
 remote_path = NodePath("../../../../../../Sprites/Hull")
 
 [node name="HeadBone" type="Bone2D" parent="Visuals/Skeleton2D/Base/Leg1Bone/Leg2Bone/HullBone"]
-position = Vector2(2, -6.00001)
+position = Vector2(2, -6)
 rest = Transform2D(1, -1.57393e-08, 1.57393e-08, 1, 2, -6)
 auto_calculate_length_and_angle = false
 length = 4.0
 bone_angle = 0.0
 script = ExtResource("2_22uee")
 transform_mode = 0
-target_position = Vector2(2, -6.00001)
+target_position = Vector2(2, -6)
 ease_rotation = true
 rotation_easing_params = SubResource("Resource_m8qsw")
 ease_position = true

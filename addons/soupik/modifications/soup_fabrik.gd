@@ -141,7 +141,7 @@ func initialize_calculation_variables(delta: float) -> void:
 	limb_lengths.clear()
 	for i: Bone2D in bone_nodes:
 		joint_points.append(i.global_position)
-		limb_lengths.append(i.get_length())
+		limb_lengths.append(i.get_length() * i.global_scale.length()/sqrt(2))
 	
 	# calculate the chain tip
 	joint_points.append(

@@ -1,77 +1,108 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4nbt4cejbiyv"]
+[gd_scene load_steps=9 format=3 uid="uid://c4nbt4cejbiyv"]
 
 [ext_resource type="Texture2D" uid="uid://0jivfoe0ipyq" path="res://assets/sprites/ButtonsSpriteSheet.png" id="1_8mqp6"]
 [ext_resource type="Script" path="res://scripts/player/control_button.gd" id="1_54lju"]
+[ext_resource type="Script" path="res://scenes/gui/slot_wire.gd" id="3_1et4v"]
+[ext_resource type="Script" path="res://addons/ropesim/RopeRendererLine2D.gd" id="3_wd2id"]
+[ext_resource type="Script" path="res://addons/ropesim/RopeHandle.gd" id="4_0wdw2"]
+
+[sub_resource type="Curve" id="Curve_078e3"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.759668, 0.995708), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_p8q0o"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.759668, 0.995708), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_eedl5"]
+interpolation_mode = 2
+interpolation_color_space = 2
+colors = PackedColorArray(0.996078, 0.905882, 0.380392, 1, 0.239216, 0.145098, 0.164706, 1)
 
 [node name="ControlButton" type="Node2D"]
+z_index = 1
 script = ExtResource("1_54lju")
 snap_radius = 24.0
 
+[node name="Node" type="Node" parent="."]
+
+[node name="SlotWire" type="Node2D" parent="Node"]
+script = ExtResource("3_1et4v")
+num_segments = 8
+rope_length = 8.0
+damping = 0.3
+num_constraint_iterations = 4
+render_line = false
+
+[node name="RopeRendererLine2D2" type="Line2D" parent="Node"]
+position = Vector2(0, 2)
+points = PackedVector2Array(0, -2, 0, 8.9184, 0, 19.7633, 0, 30.5072, 0, 41.1292, 0, 51.6141, 0, 61.9509, 0, 55.4659, 0, 48.8209, 0, 42.0129, 0, 35.0399, 0, 27.9009, 0, 20.5961, 0, 13.1267, 0, 5.49313, 0, -2.30823, 0, -10.2835, 0, -18.4359, 0, -26.7603, 0, -35.2392, 0, -27.1764, 0, -19.1999, 0, -11.2666, 0, -3.33333, 0, 5)
+width = 8.0
+width_curve = SubResource("Curve_078e3")
+default_color = Color(0.160784, 0.0784314, 0.117647, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("3_wd2id")
+target_rope_path = NodePath("../SlotWire")
+
+[node name="RopeRendererLine2D" type="Line2D" parent="Node/RopeRendererLine2D2"]
+points = PackedVector2Array(0, -2, 0, 8.9184, 0, 19.7633, 0, 30.5072, 0, 41.1292, 0, 51.6141, 0, 61.9509, 0, 55.4659, 0, 48.8209, 0, 42.0129, 0, 35.0399, 0, 27.9009, 0, 20.5961, 0, 13.1267, 0, 5.49313, 0, -2.30823, 0, -10.2835, 0, -18.4359, 0, -26.7603, 0, -35.2392, 0, -27.1764, 0, -19.1999, 0, -11.2666, 0, -3.33333, 0, 5)
+width = 4.0
+width_curve = SubResource("Curve_p8q0o")
+gradient = SubResource("Gradient_eedl5")
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("3_wd2id")
+target_rope_path = NodePath("../../SlotWire")
+
 [node name="Sprites" type="Node2D" parent="."]
-position = Vector2(0, -23)
+position = Vector2(0, 4)
 
 [node name="BaseSprite" type="Sprite2D" parent="Sprites"]
-position = Vector2(-14, -21)
-texture = ExtResource("1_8mqp6")
-centered = false
-region_enabled = true
-region_rect = Rect2(68, 1, 24, 28)
-
-[node name="LightSprites1" type="Node2D" parent="Sprites"]
 unique_name_in_owner = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Sprites/LightSprites1"]
-position = Vector2(-9, -20)
+position = Vector2(-18, -33)
 texture = ExtResource("1_8mqp6")
 centered = false
+hframes = 2
 region_enabled = true
-region_rect = Rect2(66, 54, 2, 7)
+region_rect = Rect2(47, 51, 72, 40)
 
-[node name="Sprite2D2" type="Sprite2D" parent="Sprites/LightSprites1"]
-position = Vector2(-8, 1)
-texture = ExtResource("1_8mqp6")
-centered = false
-region_enabled = true
-region_rect = Rect2(70, 54, 3, 5)
-
-[node name="Sprite2D3" type="Sprite2D" parent="Sprites/LightSprites1"]
-position = Vector2(5, -1)
-texture = ExtResource("1_8mqp6")
-centered = false
-region_enabled = true
-region_rect = Rect2(75, 52, 3, 7)
-
-[node name="LowSprites" type="Node2D" parent="Sprites"]
-
-[node name="BaseSprite2" type="Sprite2D" parent="Sprites/LowSprites"]
-position = Vector2(-10, 5)
-texture = ExtResource("1_8mqp6")
-centered = false
-region_enabled = true
-region_rect = Rect2(72, 31, 20, 19)
-
-[node name="LightSprites2" type="Node2D" parent="Sprites/LowSprites"]
+[node name="LowSprite" type="Sprite2D" parent="Sprites"]
 unique_name_in_owner = true
-
-[node name="Sprite2D2" type="Sprite2D" parent="Sprites/LowSprites/LightSprites2"]
-position = Vector2(-8, 4)
+position = Vector2(-17, 3)
 texture = ExtResource("1_8mqp6")
 centered = false
 region_enabled = true
-region_rect = Rect2(70, 61, 3, 3)
-
-[node name="Sprite2D3" type="Sprite2D" parent="Sprites/LowSprites/LightSprites2"]
-position = Vector2(5, 4)
-texture = ExtResource("1_8mqp6")
-centered = false
-region_enabled = true
-region_rect = Rect2(75, 61, 3, 3)
+region_rect = Rect2(48, 93, 34, 11)
 
 [node name="IconSprite" type="Sprite2D" parent="Sprites"]
 unique_name_in_owner = true
-position = Vector2(0, -6)
+position = Vector2(0, -19)
 texture = ExtResource("1_8mqp6")
 hframes = 4
 vframes = 4
 region_enabled = true
-region_rect = Rect2(0, 32, 64, 64)
+region_rect = Rect2(0, 0, 88, 64)
+
+[node name="SnapTarget" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 2)
+
+[node name="RopeHandle" type="Marker2D" parent="."]
+position = Vector2(0, 7)
+script = ExtResource("4_0wdw2")
+strength = 1.0
+rope_path = NodePath("../Node/SlotWire")
+
+[node name="IcoPosUp" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -15)
+
+[node name="IcoPosDown" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -12)
