@@ -1,23 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://cg57e5xigi8ea"]
+[gd_scene load_steps=8 format=3 uid="uid://cg57e5xigi8ea"]
 
 [ext_resource type="PackedScene" uid="uid://c0h0ajcunwavf" path="res://scenes/levels/tiletest.tscn" id="1_sdxe2"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_tg7e2"]
+[ext_resource type="Script" uid="uid://icrsuewbrup6" path="res://scripts/main.gd" id="1_tg7e2"]
 [ext_resource type="PackedScene" uid="uid://dof6ovnhiqdvp" path="res://scenes/entities/player.tscn" id="2_bb4hc"]
 [ext_resource type="PackedScene" uid="uid://cras0ddso0mfm" path="res://scenes/gui/player_cursor_arm.tscn" id="3_556hx"]
 [ext_resource type="Texture2D" uid="uid://dchks7euugmiq" path="res://assets/sprites/ClawSpriteSheet.png" id="4_87f6b"]
-[ext_resource type="PackedScene" uid="uid://c2hucxw3xdsec" path="res://scenes/gui/control_slot.tscn" id="6_oxmbg"]
 [ext_resource type="PackedScene" uid="uid://c4nbt4cejbiyv" path="res://scenes/gui/control_button.tscn" id="7_bnjko"]
-[ext_resource type="Script" path="res://scripts/resources/slot_data.gd" id="7_m5o10"]
 
-[sub_resource type="Resource" id="Resource_haqlt"]
-script = ExtResource("7_m5o10")
-icon_idx = 3
-signal_name = "inp_left"
-
-[sub_resource type="Resource" id="Resource_n4h3g"]
-script = ExtResource("7_m5o10")
-icon_idx = 2
-signal_name = "inp_right"
+[sub_resource type="Environment" id="Environment_b6bv0"]
+tonemap_mode = 3
+glow_enabled = true
+glow_bloom = 0.18
+glow_blend_mode = 1
+glow_hdr_threshold = 0.8
+adjustment_enabled = true
 
 [node name="Main" type="Node"]
 script = ExtResource("1_tg7e2")
@@ -28,14 +24,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color(0.1, 0.1, 0.1, 1)
 
 [node name="Node2D" parent="." instance=ExtResource("1_sdxe2")]
-
-[node name="Player" parent="." instance=ExtResource("2_bb4hc")]
-position = Vector2(112, 8)
-acceleration = 5.0
-friction = 0.02
+position = Vector2(8, -8)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchors_preset = 15
@@ -43,7 +37,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource("4_87f6b")
+draw_center = false
 region_rect = Rect2(96, 160, 96, 96)
 patch_margin_left = 32
 patch_margin_top = 32
@@ -52,21 +49,15 @@ patch_margin_bottom = 32
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="SlotLayer" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="ControlSlot" parent="SlotLayer" instance=ExtResource("6_oxmbg")]
-position = Vector2(132, 375)
-slot_data = SubResource("Resource_haqlt")
-
-[node name="ControlSlot2" parent="SlotLayer" instance=ExtResource("6_oxmbg")]
-position = Vector2(234, 375)
-slot_data = SubResource("Resource_n4h3g")
-
-[node name="ControlButton" parent="." instance=ExtResource("7_bnjko")]
-z_index = 1
-position = Vector2(94, 306)
-
 [node name="PlayerCursorArm" parent="." instance=ExtResource("3_556hx")]
 z_index = 2
-position = Vector2(800, 450)
+position = Vector2(800, 448)
+
+[node name="Player" parent="." instance=ExtResource("2_bb4hc")]
+position = Vector2(128, 392)
+
+[node name="ControlButton" parent="." instance=ExtResource("7_bnjko")]
+position = Vector2(696, 224)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b6bv0")

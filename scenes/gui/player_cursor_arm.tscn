@@ -1,14 +1,25 @@
-[gd_scene load_steps=13 format=3 uid="uid://cras0ddso0mfm"]
+[gd_scene load_steps=19 format=3 uid="uid://cras0ddso0mfm"]
 
+[ext_resource type="Material" uid="uid://cdxauypuneuvf" path="res://resource_instances/smooth_pixel_filter.tres" id="1_dgehg"]
 [ext_resource type="Texture2D" uid="uid://dchks7euugmiq" path="res://assets/sprites/ClawSpriteSheet.png" id="1_pgiwg"]
-[ext_resource type="Script" path="res://addons/soupik/modifications/soup_fabrik.gd" id="2_7kq02"]
-[ext_resource type="Script" path="res://addons/soupik/utility/soup_bone.gd" id="2_leavr"]
-[ext_resource type="Script" path="res://addons/soupik/modifications/soup_group.gd" id="2_ukgaj"]
-[ext_resource type="Script" path="res://addons/soupik/resources/zm_easing_params.gd" id="3_upo2r"]
-[ext_resource type="Script" path="res://addons/soupik/modifications/soup_look_at.gd" id="4_2mony"]
-[ext_resource type="Script" path="res://addons/soupik/resources/zm_easing_rotational_params.gd" id="4_75gx6"]
-[ext_resource type="Script" path="res://scripts/player/claw_controller.gd" id="5_pk2jo"]
-[ext_resource type="Script" path="res://addons/soupik/resources/zm_constraint_data.gd" id="9_lwyg2"]
+[ext_resource type="Script" uid="uid://5lupmg4ij7us" path="res://addons/ropesim/RopeRendererLine2D.gd" id="2_0e6nn"]
+[ext_resource type="Script" uid="uid://c5xhmymovtl1l" path="res://addons/soupik/modifications/soup_fabrik.gd" id="2_7kq02"]
+[ext_resource type="Script" uid="uid://dnw3g1hpdxkkb" path="res://addons/soupik/utility/soup_bone.gd" id="2_leavr"]
+[ext_resource type="Script" uid="uid://bwf1mx80kax57" path="res://addons/soupik/modifications/soup_group.gd" id="2_ukgaj"]
+[ext_resource type="Script" uid="uid://d1whty1xl8wr7" path="res://addons/soupik/resources/zm_easing_params.gd" id="3_upo2r"]
+[ext_resource type="Script" uid="uid://dmvgcp50idllb" path="res://addons/soupik/modifications/soup_look_at.gd" id="4_2mony"]
+[ext_resource type="Script" uid="uid://jb4g5uiu5rai" path="res://addons/soupik/resources/zm_easing_rotational_params.gd" id="4_75gx6"]
+[ext_resource type="Script" uid="uid://jn1kknwcoftm" path="res://addons/ropesim/RopeHandle.gd" id="4_b4inj"]
+[ext_resource type="Script" uid="uid://dkjgprpxkwn8m" path="res://scripts/player/claw_controller.gd" id="5_pk2jo"]
+[ext_resource type="Script" uid="uid://olvsb27nvtwt" path="res://addons/soupik/resources/zm_constraint_data.gd" id="9_lwyg2"]
+[ext_resource type="Script" uid="uid://cjky2f8lqxgb2" path="res://addons/ropesim/Rope.gd" id="10_uftm1"]
+
+[sub_resource type="Curve" id="Curve_dgehg"]
+_data = [Vector2(0, 0.254454), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_w0y6g"]
+colors = PackedColorArray(0, 0, 0, 1, 0.160784, 0.0784314, 0.117647, 1)
 
 [sub_resource type="Resource" id="Resource_ens6v"]
 script = ExtResource("3_upo2r")
@@ -31,12 +42,40 @@ area_rotation_degrees = 0.0
 proportions = Vector2(1, 1)
 
 [node name="PlayerCursorArm" type="Node2D"]
+texture_filter = 2
+material = ExtResource("1_dgehg")
+
+[node name="Rope" type="Node2D" parent="."]
+position = Vector2(-367, -196)
+scale = Vector2(1, 1)
+script = ExtResource("10_uftm1")
+num_segments = 64
+rope_length = 640.0
+damping = 0.8
+num_constraint_iterations = 16
+render_line = false
+line_width = 10.0
+color = Color(0.51641, 0, 0.174456, 1)
+metadata/_custom_type_script = "uid://cjky2f8lqxgb2"
+
+[node name="RopeRendererLine2D" type="Line2D" parent="Rope"]
+points = PackedVector2Array(0, 0, 4.86462, 9.71397, 9.96207, 19.2726, 15.4465, 28.5652, 21.4216, 37.4889, 27.9742, 45.9262, 35.1903, 53.7241, 43.1513, 60.675, 51.9095, 66.5016, 61.4428, 70.86, 71.5946, 73.3912, 82.0422, 73.9184, 92, 73, 104.583, 79.2931, 117.211, 85.4604, 129.91, 91.4264, 142.698, 97.1377, 155.58, 102.559, 168.559, 107.668, 181.634, 112.451, 194.803, 116.896, 208.065, 121.002, 221.41, 124.788, 234.823, 128.304, 248.282, 131.642, 258, 134, 266.863, 139.248, 276.477, 142.922, 286.702, 144.124, 296.891, 142.554, 306.392, 138.512, 314.884, 132.615, 322.381, 125.496, 329, 118, 337.903, 122.931, 347.665, 125.764, 357.822, 125.469, 367.425, 122.144, 376, 117, 375.981, 128.53, 375.962, 140.022, 375.942, 151.463, 375.92, 162.837, 375.897, 174.136, 375.873, 185.351, 375.847, 196.476, 375.819, 207.506, 375.788, 218.438, 375.754, 229.27, 375.717, 240, 375.674, 250.627, 375.625, 261.15, 375.567, 271.57, 375.494, 281.884, 375.399, 292.092, 375.259, 302.195, 374.998, 312.193, 367.738, 318.97, 367.464, 308.778, 367.32, 298.506, 367.224, 288.171, 367.151, 277.795, 367.092, 267.397, 367.043, 257, 367, 247)
+width = 16.0
+width_curve = SubResource("Curve_dgehg")
+gradient = SubResource("Gradient_w0y6g")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("2_0e6nn")
+metadata/_custom_type_script = "uid://5lupmg4ij7us"
 
 [node name="Sprites" type="Node2D" parent="."]
+use_parent_material = true
 
 [node name="Arm8" type="Sprite2D" parent="Sprites"]
-position = Vector2(-0.000180974, 117.002)
-rotation = 1.06098e-05
+use_parent_material = true
+position = Vector2(-0.00017923, 117.002)
+rotation = 1.05949e-05
 scale = Vector2(0.999982, 0.999982)
 texture = ExtResource("1_pgiwg")
 centered = false
@@ -45,6 +84,7 @@ region_enabled = true
 region_rect = Rect2(153, 7, 36, 151)
 
 [node name="Arm6" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 position = Vector2(-10.9995, 137)
 rotation = -3.14158
 scale = Vector2(0.999982, 0.999982)
@@ -55,6 +95,7 @@ region_enabled = true
 region_rect = Rect2(153, 7, 36, 151)
 
 [node name="Arm7" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 position = Vector2(14.9997, 137.002)
 rotation = -3.14158
 scale = Vector2(0.999982, 0.999982)
@@ -66,6 +107,7 @@ region_enabled = true
 region_rect = Rect2(153, 7, 36, 151)
 
 [node name="Arm4" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 position = Vector2(-414, -243)
 rotation = -0.790836
 scale = Vector2(0.999993, 0.999993)
@@ -76,6 +118,7 @@ region_enabled = true
 region_rect = Rect2(66, 8, 23, 145)
 
 [node name="Arm3" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 position = Vector2(-318.757, -153.007)
 rotation = -0.970586
 scale = Vector2(0.99999, 0.99999)
@@ -86,6 +129,7 @@ region_enabled = true
 region_rect = Rect2(91, 5, 25, 149)
 
 [node name="Arm2" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 position = Vector2(-210.349, -81.2317)
 rotation = -1.39579
 scale = Vector2(0.999989, 0.999989)
@@ -96,6 +140,7 @@ region_enabled = true
 region_rect = Rect2(118, 3, 29, 155)
 
 [node name="Arm1" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 position = Vector2(-83.4948, -57.7866)
 rotation = -2.13164
 scale = Vector2(0.999985, 0.999985)
@@ -106,6 +151,7 @@ region_enabled = true
 region_rect = Rect2(153, 7, 36, 151)
 
 [node name="Arm5" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 position = Vector2(25.7426, -126.403)
 rotation = 0.200907
 scale = Vector2(0.999983, 0.999983)
@@ -117,6 +163,7 @@ region_rect = Rect2(153, 7, 36, 151)
 
 [node name="HandSprite" type="Sprite2D" parent="Sprites"]
 unique_name_in_owner = true
+use_parent_material = true
 position = Vector2(-414, -243)
 scale = Vector2(0.999994, 0.999994)
 texture = ExtResource("1_pgiwg")
@@ -200,6 +247,51 @@ remote_path = NodePath("../../../../../../../../Sprites/Arm7")
 [node name="Arm5RT3" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone/Arm6Bone"]
 position = Vector2(-0.000993848, 117.003)
 remote_path = NodePath("../../../../../../../../Sprites/Arm8")
+
+[node name="RopeHandle" type="Marker2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone/Arm6Bone"]
+position = Vector2(-0.00149825, 50.9995)
+script = ExtResource("4_b4inj")
+strength = 1.0
+rope_path = NodePath("../../../../../../../../Rope")
+metadata/_custom_type_script = "uid://jn1kknwcoftm"
+
+[node name="RopeHandle2" type="Marker2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone/Arm5Bone"]
+position = Vector2(-6.94619, 49.7917)
+script = ExtResource("4_b4inj")
+strength = 1.0
+rope_path = NodePath("../../../../../../../Rope")
+rope_position = 0.602
+metadata/_custom_type_script = "uid://jn1kknwcoftm"
+
+[node name="RopeHandle3" type="Marker2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone/Arm1Bone"]
+position = Vector2(-7.08223, 49.2775)
+script = ExtResource("4_b4inj")
+strength = 1.0
+rope_path = NodePath("../../../../../../Rope")
+rope_position = 0.52
+metadata/_custom_type_script = "uid://jn1kknwcoftm"
+
+[node name="RopeHandle4" type="Marker2D" parent="Skeleton2D/Arm4Bone/Arm3Bone/Arm2Bone"]
+position = Vector2(-1.29159, 103.15)
+script = ExtResource("4_b4inj")
+strength = 1.0
+rope_path = NodePath("../../../../../Rope")
+rope_position = 0.4
+metadata/_custom_type_script = "uid://jn1kknwcoftm"
+
+[node name="RopeHandle5" type="Marker2D" parent="Skeleton2D/Arm4Bone/Arm3Bone"]
+position = Vector2(-0.0478477, 53.0577)
+script = ExtResource("4_b4inj")
+strength = 1.0
+rope_path = NodePath("../../../../Rope")
+rope_position = 0.2
+metadata/_custom_type_script = "uid://jn1kknwcoftm"
+
+[node name="RopeRT" type="RemoteTransform2D" parent="Skeleton2D/Arm4Bone"]
+position = Vector2(-0.361404, 66.4675)
+rotation = 0.790836
+scale = Vector2(1.00001, 1.00001)
+remote_path = NodePath("../../../Rope")
 
 [node name="SoupGroup" type="Node" parent="Skeleton2D"]
 script = ExtResource("2_ukgaj")

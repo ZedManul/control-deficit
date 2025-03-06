@@ -1,23 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2hucxw3xdsec"]
+[gd_scene load_steps=4 format=3 uid="uid://c2hucxw3xdsec"]
 
-[ext_resource type="Script" path="res://scripts/player/control_slot.gd" id="1_j8chw"]
+[ext_resource type="Script" uid="uid://cnxmh4020vtwu" path="res://scripts/player/control_slot.gd" id="1_j8chw"]
+[ext_resource type="Material" uid="uid://cdxauypuneuvf" path="res://resource_instances/smooth_pixel_filter.tres" id="1_ljbvp"]
 [ext_resource type="Texture2D" uid="uid://0jivfoe0ipyq" path="res://assets/sprites/ButtonsSpriteSheet.png" id="2_1ua2p"]
 
-[node name="ControlSlot" type="Node2D"]
+[node name="ControlSlot" type="Node2D" groups=["button_slots"]]
+texture_filter = 2
+material = ExtResource("1_ljbvp")
 script = ExtResource("1_j8chw")
 priority = null
 
 [node name="BaseSprite" type="Sprite2D" parent="."]
+use_parent_material = true
 texture = ExtResource("2_1ua2p")
 region_enabled = true
 region_rect = Rect2(2, 66, 44, 42)
 
 [node name="IconSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+use_parent_material = true
 position = Vector2(0, -1)
 texture = ExtResource("2_1ua2p")
 hframes = 4
 vframes = 4
-frame = 12
 region_enabled = true
 region_rect = Rect2(0, 0, 88, 64)

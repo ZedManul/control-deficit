@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="ControlDeficitGGE"
+config/name="ControlDeficit"
+config/version="0.0.1"
 run/main_scene="res://scenes/levels/main.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="uid://070a0ynv6qk8"
 
 [autoload]
 
@@ -24,15 +25,16 @@ ControlSignalBus="*res://scripts/player/control_signal_bus.gd"
 
 window/size/viewport_width=800
 window/size/viewport_height=450
-window/size/window_width_override=1600
-window/size/window_height_override=900
 window/stretch/mode="canvas_items"
-window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="res://assets/sprites/Cursor.png"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/ropesim/plugin.cfg", "res://addons/soupik/plugin.cfg")
+
+[global_group]
+
+button_slots=""
 
 [input]
 
@@ -55,3 +57,5 @@ btn_press={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/default_filters/use_nearest_mipmap_filter=true
+viewport/hdr_2d=true

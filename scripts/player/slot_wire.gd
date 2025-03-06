@@ -2,6 +2,7 @@
 extends Rope
 
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	await GlobalRefs.refs_ready
 	GlobalRefs.control_button.slot_changed.connect(_on_slot_change)
 

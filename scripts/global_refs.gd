@@ -28,18 +28,11 @@ var control_cursor: ClawController:
 		inits["control_cursor"] = true
 		verify_inits()
 
-var slot_layer: Node2D:
-	set(value):
-		slot_layer = value
-		inits["slot_layer"] = true
-		verify_inits()
-
 var inits: Dictionary = {
 	"main" : false,
 	"player" : false,
 	"control_button" : false,
 	"control_cursor" : false,
-	"slot_layer" : false,
 }
 
 var done_init: bool = false
